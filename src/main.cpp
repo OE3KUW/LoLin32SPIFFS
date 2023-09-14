@@ -64,20 +64,18 @@ void setup()
     }        
              );  
 
+    server.on("/logo", HTTP_GET, 
+    [](AsyncWebServerRequest *request)
+    {
+        request->send(SPIFFS, "/logo.png", "image/png");
+    }
+             );
+
     server.serveStatic("/", SPIFFS, "/");
 
 
-    /*
-    server.on("/", HTTP_GET, 
-    [](AsyncWebServerRequest *request)
-    { 
-        request->send_P(200, "text/html", index_html);
-        // 200 OK success status response
-        // context type: html-text
-        // Page above...
-    }        
-             );  
-*/
+
+   
     server.begin();    
 
 }
