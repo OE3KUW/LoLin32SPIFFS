@@ -15,9 +15,10 @@
 
 
 #define LED                            5
-#define NUM_OUTPUTS                    1
+#define CORNER                         2
+#define NUM_OUTPUTS                    2
 
-int outputGPIOs[NUM_OUTPUTS] = {LED};
+int outputGPIOs[NUM_OUTPUTS] = {LED, CORNER};
 
 
 const char *ssid = "A1-A82861";
@@ -55,14 +56,15 @@ String getOutputStates()
     }
     String jsonString = JSON.stringify(myArray);
     Serial.print(jsonString);
+    Serial.println("ok!");
     return jsonString;
 }
 
 
 void setup() 
 {
-    pinMode(LED, OUTPUT);
-    digitalWrite(LED, LOW); 
+    pinMode(LED, OUTPUT);    digitalWrite(LED, LOW); 
+    pinMode(CORNER, OUTPUT); digitalWrite(CORNER, LOW); 
 
 
     Serial.begin(115200);
@@ -72,8 +74,6 @@ void setup()
     {
         pinMode(outputGPIOs[i], OUTPUT);
     } 
-
-
 
     initWiFi();
 
